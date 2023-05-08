@@ -21,25 +21,41 @@ class Login : AppCompatActivity() {
         prefrences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         editor = prefrences.edit()
         editor.apply()
+binding.btnLogin.setOnClickListener {
 
         if (binding.editTextTextPersonName.text.isEmpty() || binding.editTextpssword.text.isEmpty()) {
 
             Toast.makeText(this, "لطفا مقادیر مد نظر را پر کنید", Toast.LENGTH_SHORT).show()
         } else {
 
-            binding.btnLogin.setOnClickListener {
                 val user = binding.editTextTextPersonName.text.toString()
                 val password = binding.editTextpssword.text.toString()
-                editor.putString("username",user).apply()
-                editor.putString("pass",password).apply()
-                var intent = Intent(this, MainActivity::class.java)
 
-                intent.putExtra("name", "meraj")
-                startActivity(intent)
-            }
+                val firstStartBefore:Boolean = prefrences.getBoolean("firstLogin",false)
+
+                if (firstStartBefore){
+
+                    val username = prefrences.getString("username","")
+                    val pass = prefrences.getString("pass","")
+                    if (username==user && password==pass){
+                        val  intent = Intent(this,MainActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                }else{
+                    editor.putString("username",user).apply()
+                    editor.putString("pass",password).apply()
+                    editor.putBoolean("firstLogin",true).apply()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+
+
+
 
 
         }
+}
 
     }
 }
