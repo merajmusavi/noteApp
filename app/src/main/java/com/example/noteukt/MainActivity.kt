@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.noteukt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener {
             showDialog()
         }
+
+        binding.rec.layoutManager = LinearLayoutManager(this)
+
+        binding.rec.adapter = RecyclerAdapter(this)
+
+
     }
 
     fun showDialog() {
