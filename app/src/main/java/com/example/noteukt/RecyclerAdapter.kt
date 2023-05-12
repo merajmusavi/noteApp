@@ -19,7 +19,9 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>, val list
         }
 
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION)
+                listener.onItem(position)
         }
     }
 
@@ -43,7 +45,7 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>, val list
     }
 
     interface OnItemClick {
-        fun onItem()
+        fun onItem(position: Int)
     }
 
 }
