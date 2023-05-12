@@ -7,27 +7,43 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.noteukt.databinding.NoteItemBinding
 
-class RecyclerAdapter(val con: Context,val li : MutableList<DataModel>) : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>, val listener: OnItemClick) :
+    RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val tvTitle: TextView = item.findViewById(R.id.tvTitle)
-        val tvDec: TextView = item.findViewById(R.id.tvDescription)
-        val buttonDelete: ImageView = item.findViewById(R.id.DeleteBtn)
+    inner class MyViewHolder(val item: NoteItemBinding) : RecyclerView.ViewHolder(item.root),
+        View.OnClickListener {
+        init {
+            item.root.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            TODO("Not yet implemented")
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view: View = LayoutInflater.from(con).inflate(R.layout.note_item, parent, false)
-        return MyViewHolder(view)
+        return MyViewHolder(
+            NoteItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-          holder.tvDec.text = li[position].description
-        holder.tvTitle.text = li[position].title
+        holder.item.tvDescription.text = li[position].description
+        holder.item.tvTitle.text = li[position].title
     }
 
     override fun getItemCount(): Int {
         return li.size
+    }
+
+    interface OnItemClick {
+        fun onItem()
     }
 
 }
