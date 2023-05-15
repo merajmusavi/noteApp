@@ -1,13 +1,11 @@
-package com.example.noteukt
+package com.example.noteukt.Activity
 
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Toast
 import com.example.noteukt.databinding.ActivityLoginBinding
-import com.example.noteukt.databinding.ActivityMainBinding
 
 class Login : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -38,7 +36,7 @@ binding.btnLogin.setOnClickListener {
                     val username = prefrences.getString("username","")
                     val pass = prefrences.getString("pass","")
                     if (username==user && password==pass){
-                        val  intent = Intent(this,MainActivity::class.java)
+                        val  intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }
 

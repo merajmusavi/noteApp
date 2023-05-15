@@ -9,22 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteukt.databinding.NoteItemBinding
 
-class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>, val listener: OnItemClick) :
+class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(val item: NoteItemBinding) : RecyclerView.ViewHolder(item.root),
-        View.OnClickListener {
-        init {
-            item.root.setOnClickListener(this)
-        }
+    inner class MyViewHolder(val item: NoteItemBinding) : RecyclerView.ViewHolder(item.root)
+    {
 
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION)
-                listener.onItem(position)
-        }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             NoteItemBinding.inflate(
@@ -44,8 +35,5 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>, val list
         return li.size
     }
 
-    interface OnItemClick {
-        fun onItem(position: Int)
-    }
 
 }
