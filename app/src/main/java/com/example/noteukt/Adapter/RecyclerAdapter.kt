@@ -1,12 +1,10 @@
-package com.example.noteukt
+package com.example.noteukt.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.noteukt.DataBase.DataModel
 import com.example.noteukt.databinding.NoteItemBinding
 
 class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :

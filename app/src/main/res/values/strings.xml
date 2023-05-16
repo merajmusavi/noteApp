@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">noteUkt</string>
+    <string name="import_your_new_note">import your new note</string>
 </resources>

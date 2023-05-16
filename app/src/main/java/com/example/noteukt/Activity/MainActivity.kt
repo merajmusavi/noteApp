@@ -8,9 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.noteukt.DataModel
+import com.example.noteukt.DataBase.DataModel
 import com.example.noteukt.R
-import com.example.noteukt.RecyclerAdapter
+import com.example.noteukt.Adapter.RecyclerAdapter
 import com.example.noteukt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
