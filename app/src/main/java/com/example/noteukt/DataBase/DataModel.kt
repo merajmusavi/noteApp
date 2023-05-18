@@ -10,10 +10,10 @@ data class DataModel(
     @PrimaryKey
     val id: Int,
 
-    @ColumnInfo
+    @ColumnInfo(name = "title")
     val title: String,
 
-    @ColumnInfo
+    @ColumnInfo(name = "description")
     val description: String
 )
 
