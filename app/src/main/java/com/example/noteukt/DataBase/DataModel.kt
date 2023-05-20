@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "notes")
 data class DataModel(
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int=0,
 
     @ColumnInfo(name = "title")

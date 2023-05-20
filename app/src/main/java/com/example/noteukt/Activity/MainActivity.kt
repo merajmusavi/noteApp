@@ -1,5 +1,6 @@
 package com.example.noteukt.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,40 +12,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.noteukt.DataBase.DataModel
 import com.example.noteukt.R
 import com.example.noteukt.Adapter.RecyclerAdapter
+import com.example.noteukt.DataBase.DataBase
+import com.example.noteukt.DataBase.NotesDao
 import com.example.noteukt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    lateinit var notesDao:NotesDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val intent = intent
 
-        val view: View = LayoutInflater.from(this).inflate(R.layout.add_note_dialog, null)
-        val alert = AlertDialog.Builder(this).setView(view).create()
+        notesDao = DataBase.createDataBase(this).getNotes()
 
-        val et:EditText = view.findViewById(R.id.editTextTextPersonName)
-
-        val btnConfirm:Button = view.findViewById(R.id.btnLogin)
-
-
+        val listOfNotes:MutableList<DataModel> = notesDao.getAllNotes()
 
 
         binding.rec.layoutManager = LinearLayoutManager(this)
-        val data = mutableListOf<DataModel>()
-        val adapter = RecyclerAdapter(this, data)
+        val adapter = RecyclerAdapter(this, listOfNotes)
         binding.rec.adapter = adapter
-
-        btnConfirm.setOnClickListener {
-            data.add(DataModel(et.text.toString(),""))
-            alert.hide()
-        }
 
 
         binding.floatingActionButton.setOnClickListener {
-alert.show()
-
+            val goToAddData = Intent(this,AddNotesActivity::class.java)
+            startActivity(goToAddData)
+            finish()
         }
 
 

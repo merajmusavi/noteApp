@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     app:cardCornerRadius="4dp"
+    android:id="@+id/mainCard"
     app:cardElevation="5dp">
 
     <RelativeLayout
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="title"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tvDescription"
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:maxLength="25"
+                android:textColor="@color/white"
                 android:maxLines="1"
                 android:text="sgfsrdrgregregregrdgdargdg   rdg rdsfgtrsg resgtrs gr hgrhg rtstr" />
 
