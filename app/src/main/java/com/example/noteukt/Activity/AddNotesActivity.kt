@@ -33,6 +33,7 @@ class AddNotesActivity : AppCompatActivity() {
             val list:MutableList<DataModel> = note.getAllNotes()
             binding.title.setText(list[position].title)
             binding.desc.setText(list[position].description)
+
         }
 
 

@@ -4,10 +4,12 @@ import android.content.BroadcastReceiver
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.noteukt.DataBase.DataModel
@@ -17,7 +19,7 @@ import com.example.noteukt.DataBase.DataBase
 import com.example.noteukt.DataBase.NotesDao
 import com.example.noteukt.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(),RecyclerAdapter.OnDeleteButtonClick {
+class MainActivity : AppCompatActivity(),RecyclerAdapter.OnButtonClickListener {
     lateinit var binding: ActivityMainBinding
     lateinit var notesDao: NotesDao
     lateinit var receiver:BroadcastReceiver
@@ -27,8 +29,6 @@ class MainActivity : AppCompatActivity(),RecyclerAdapter.OnDeleteButtonClick {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val intent = intent
-        val isDeleteBtnClicked = intent.getBooleanExtra("clickedOnItem1",false)
-        val position = intent.getIntExtra("position1",0)
 
 
 
@@ -42,11 +42,14 @@ class MainActivity : AppCompatActivity(),RecyclerAdapter.OnDeleteButtonClick {
        listOfNotes = notesDao.getAllNotes()
 
 
+
         binding.rec.layoutManager = LinearLayoutManager(this)
         val adapter = RecyclerAdapter(this, listOfNotes)
+        adapter.setonButtonClickListener(this)
         binding.rec.adapter = adapter
 
 
+        Log.d("see id", "onCreate: "+listOfNotes)
 
         binding.floatingActionButton.setOnClickListener {
             val goToAddData = Intent(this, AddNotesActivity::class.java)
@@ -57,10 +60,15 @@ class MainActivity : AppCompatActivity(),RecyclerAdapter.OnDeleteButtonClick {
 
     }
 
-    override fun onDeleteClicked(position: Int) {
-        notesDao.deleteItemById(position.toLong())
+    override fun onButtonClicked(position: Int) {
+        val item = listOfNotes[position]
+        notesDao.deleteItemById(item.id.toLong())
         listOfNotes.removeAt(position)
         binding.rec.adapter?.notifyItemRemoved(position)
+
     }
+
+
+
 
 }

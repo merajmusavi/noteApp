@@ -13,11 +13,10 @@ import com.example.noteukt.databinding.NoteItemBinding
 class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
-    private var onDelete:OnDeleteButtonClick? = null
 
-
-    fun setOnDeleteListener(listener:OnDeleteButtonClick){
-        onDelete = listener
+    private var onButtonClicked:OnButtonClickListener? = null
+    fun setonButtonClickListener(listener:OnButtonClickListener){
+        onButtonClicked = listener
     }
 
     inner class MyViewHolder(val item: NoteItemBinding) : RecyclerView.ViewHolder(item.root)
@@ -25,10 +24,9 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
         init {
             item.DeleteBtn.setOnClickListener {
                 val position = adapterPosition
-                onDelete?.onDeleteClicked(position)
+                onButtonClicked?.onButtonClicked(position)
             }
         }
-
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -58,9 +56,8 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
         return li.size
     }
 
-
-interface OnDeleteButtonClick{
-    fun onDeleteClicked(position:Int)
+interface OnButtonClickListener{
+    fun onButtonClicked(position: Int)
 }
 
 }
