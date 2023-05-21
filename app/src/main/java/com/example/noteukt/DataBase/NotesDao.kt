@@ -12,5 +12,8 @@ interface NotesDao {
 
     @Insert
     fun addNote(notes:DataModel)
+
+    @Query("DELETE FROM notes WHERE id = :itemId")
+     fun deleteItemById(itemId: Long)
 }
 

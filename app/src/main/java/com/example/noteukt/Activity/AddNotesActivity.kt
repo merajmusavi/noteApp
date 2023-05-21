@@ -23,13 +23,19 @@ class AddNotesActivity : AppCompatActivity() {
         val intent = intent
 
         val isClickedToView = intent.getBooleanExtra("clickedOnItem",false)
+        val position = intent.getIntExtra("position",0)
 
         if (isClickedToView){
             binding.title.isEnabled = false
             binding.desc.isEnabled = false
             binding.btnSave.visibility = View.GONE
             binding.textView2.text = getString(R.string.showNotes)
+            val list:MutableList<DataModel> = note.getAllNotes()
+            binding.title.setText(list[position].title)
+            binding.desc.setText(list[position].description)
         }
+
+
 
 
         binding.btnSave.setOnClickListener {
