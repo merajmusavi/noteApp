@@ -3,6 +3,7 @@ package com.example.noteukt.DataBase
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface NotesDao {
@@ -15,5 +16,12 @@ interface NotesDao {
 
     @Query("DELETE FROM notes WHERE id = :itemId")
      fun deleteItemById(itemId: Long)
+
+     
+
+    @Update
+    fun updateTask(task:DataModel)
+
+
 }
 

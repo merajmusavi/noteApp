@@ -19,10 +19,10 @@ import com.example.noteukt.DataBase.DataBase
 import com.example.noteukt.DataBase.NotesDao
 import com.example.noteukt.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(),RecyclerAdapter.OnButtonClickListener {
+class MainActivity : AppCompatActivity(), RecyclerAdapter.OnButtonClickListener {
     lateinit var binding: ActivityMainBinding
     lateinit var notesDao: NotesDao
-    lateinit var receiver:BroadcastReceiver
+    lateinit var receiver: BroadcastReceiver
     lateinit var listOfNotes: MutableList<DataModel>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(),RecyclerAdapter.OnButtonClickListener {
 
 
 
-       listOfNotes = notesDao.getAllNotes()
+        listOfNotes = notesDao.getAllNotes()
 
 
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(),RecyclerAdapter.OnButtonClickListener {
         binding.rec.adapter = adapter
 
 
-        Log.d("see id", "onCreate: "+listOfNotes)
+        Log.d("see id", "onCreate: " + listOfNotes)
 
         binding.floatingActionButton.setOnClickListener {
             val goToAddData = Intent(this, AddNotesActivity::class.java)
@@ -68,7 +68,12 @@ class MainActivity : AppCompatActivity(),RecyclerAdapter.OnButtonClickListener {
 
     }
 
+    override fun onButtonLongClicked(position: Int) {
+        val goToAddData = Intent(this, AddNotesActivity::class.java)
+        intent.putExtra("isOnLongClicked",true)
+        startActivity(goToAddData)
 
+    }
 
 
 }

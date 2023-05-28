@@ -22,6 +22,13 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
     inner class MyViewHolder(val item: NoteItemBinding) : RecyclerView.ViewHolder(item.root)
     {
         init {
+
+            item.mainCard.setOnLongClickListener {
+                val position = adapterPosition
+                onButtonClicked?.onButtonLongClicked(position)
+            true
+            }
+
             item.DeleteBtn.setOnClickListener {
                 val position = adapterPosition
                 onButtonClicked?.onButtonClicked(position)
@@ -58,6 +65,7 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
 
 interface OnButtonClickListener{
     fun onButtonClicked(position: Int)
+    fun onButtonLongClicked(position: Int)
 }
 
 }
