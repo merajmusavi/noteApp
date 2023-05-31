@@ -35,12 +35,39 @@ class AddNotesActivity : AppCompatActivity() {
             binding.title.setText(list[positionLong].title)
             binding.desc.setText(list[positionLong].description)
 
+            val id = list[position].id
 
+            val selectedItem = note.selectById(id.toLong())
             val title = binding.title.text.toString()
             val desc = binding.desc.text.toString()
 
-            val dataToPass = DataModel(title=title, description = desc)
-            note.updateTask(dataToPass)
+            binding.btnSave.setOnLongClickListener {
+                selectedItem.title =title
+                selectedItem.description = desc
+
+                note.updateTask(selectedItem)
+
+
+                finish()
+
+                true
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
