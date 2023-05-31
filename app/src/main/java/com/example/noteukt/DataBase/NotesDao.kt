@@ -17,7 +17,8 @@ interface NotesDao {
     @Query("DELETE FROM notes WHERE id = :itemId")
      fun deleteItemById(itemId: Long)
 
-     
+     @Query("SELECT * FROM notes WHERE id = :itemId")
+     fun selectById(itemId: Long)
 
     @Update
     fun updateTask(task:DataModel)

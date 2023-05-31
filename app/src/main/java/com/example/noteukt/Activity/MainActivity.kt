@@ -70,10 +70,14 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnButtonClickListener 
 
     override fun onButtonLongClicked(position: Int) {
         val goToAddData = Intent(this, AddNotesActivity::class.java)
-        intent.putExtra("isOnLongClicked",true)
+        goToAddData.putExtra("isOnLongClicked",true)
+        goToAddData.putExtra("positionLong",position)
         startActivity(goToAddData)
 
     }
+
+
+
 
 
 }

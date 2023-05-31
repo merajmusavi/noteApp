@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="title"
-                android:textColor="@color/white" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tvDescription"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:maxLength="25"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:maxLines="1"
                 android:text="sgfsrdrgregregregrdgdargdg   rdg rdsfgtrsg resgtrs gr hgrhg rtstr" />
 

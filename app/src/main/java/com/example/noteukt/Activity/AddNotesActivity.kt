@@ -25,6 +25,29 @@ class AddNotesActivity : AppCompatActivity() {
         val isClickedToView = intent.getBooleanExtra("clickedOnItem",false)
         val position = intent.getIntExtra("position",0)
 
+        val isOnLongButtonClicked = intent.getBooleanExtra("isOnLongClicked",false)
+        val positionLong = intent.getIntExtra("positionLong",0)
+
+
+        if (isOnLongButtonClicked){
+            val list:MutableList<DataModel> = note.getAllNotes()
+
+            binding.title.setText(list[positionLong].title)
+            binding.desc.setText(list[positionLong].description)
+
+
+            val title = binding.title.text.toString()
+            val desc = binding.desc.text.toString()
+
+            val dataToPass = DataModel(title=title, description = desc)
+            note.updateTask(dataToPass)
+
+
+
+
+
+        }
+
         if (isClickedToView){
             binding.title.isEnabled = false
             binding.desc.isEnabled = false
