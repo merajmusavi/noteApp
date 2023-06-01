@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnButtonClickListener 
     lateinit var notesDao: NotesDao
     lateinit var receiver: BroadcastReceiver
     lateinit var listOfNotes: MutableList<DataModel>
+    lateinit var  adapter:RecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnButtonClickListener 
 
 
         binding.rec.layoutManager = LinearLayoutManager(this)
-        val adapter = RecyclerAdapter(this, listOfNotes)
+         adapter = RecyclerAdapter(this, listOfNotes)
         adapter.setonButtonClickListener(this)
         binding.rec.adapter = adapter
 
@@ -73,6 +74,14 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnButtonClickListener 
         goToAddData.putExtra("isOnLongClicked",true)
         goToAddData.putExtra("positionLong",position)
         startActivity(goToAddData)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val updatedList:MutableList<DataModel> = notesDao.getAllNotes()
+        adapter.updateData(updatedList)
+
 
     }
 

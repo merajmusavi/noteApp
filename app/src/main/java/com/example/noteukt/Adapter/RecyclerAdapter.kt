@@ -10,7 +10,7 @@ import com.example.noteukt.Activity.MainActivity
 import com.example.noteukt.DataBase.DataModel
 import com.example.noteukt.databinding.NoteItemBinding
 
-class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
+class RecyclerAdapter(val con: Context, var li: MutableList<DataModel>) :
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
 
@@ -45,6 +45,11 @@ class RecyclerAdapter(val con: Context, val li: MutableList<DataModel>) :
         )
     }
 
+    fun updateData(list:MutableList<DataModel>){
+        li = list
+        notifyDataSetChanged()
+
+    }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.item.tvDescription.text = li[position].description
         holder.item.tvTitle.text = li[position].title
