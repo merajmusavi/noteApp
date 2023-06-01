@@ -35,17 +35,26 @@ class AddNotesActivity : AppCompatActivity() {
             binding.title.setText(list[positionLong].title)
             binding.desc.setText(list[positionLong].description)
 
-            val id = list[position].id
+            val id = list[positionLong].id
+
 
             val selectedItem = note.selectById(id.toLong())
-            val title = binding.title.text.toString()
-            val desc = binding.desc.text.toString()
 
+
+            Log.d("checkList", "onCreate: "+list[position])
+            Log.d("checkList2", "onCreate: "+list[positionLong])
+            Log.d("selectedItem", "onCreate: $selectedItem")
             binding.btnSave.setOnLongClickListener {
-                selectedItem.title =title
-                selectedItem.description = desc
+                val title = binding.title.text.toString()
+                val desc = binding.desc.text.toString()
+                selectedItem?.title =title
+                selectedItem?.description = desc
 
-                note.updateTask(selectedItem)
+                Log.d("selectedItem2", "onCreate: $selectedItem")
+
+                if (selectedItem != null) {
+                    note.updateTask(selectedItem)
+                }
 
 
                 finish()
