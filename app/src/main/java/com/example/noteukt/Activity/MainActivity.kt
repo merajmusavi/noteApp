@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnButtonClickListener 
         val item = listOfNotes[position]
         notesDao.deleteItemById(item.id.toLong())
         listOfNotes.removeAt(position)
-        binding.rec.adapter?.notifyItemRemoved(position)
+        adapter.notifyItemRemoved(position)
+        adapter.notifyItemRangeChanged(position,listOfNotes.size)
 
     }
 

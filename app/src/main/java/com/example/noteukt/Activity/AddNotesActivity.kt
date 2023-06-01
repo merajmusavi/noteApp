@@ -13,8 +13,8 @@ import com.example.noteukt.R
 import com.example.noteukt.databinding.ActivityAddNotesBinding
 
 class AddNotesActivity : AppCompatActivity() {
-    lateinit var binding:ActivityAddNotesBinding
-    lateinit var note:NotesDao
+    lateinit var binding: ActivityAddNotesBinding
+    lateinit var note: NotesDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddNotesBinding.inflate(layoutInflater)
@@ -22,15 +22,15 @@ class AddNotesActivity : AppCompatActivity() {
         note = DataBase.createDataBase(this).getNotes()
         val intent = intent
 
-        val isClickedToView = intent.getBooleanExtra("clickedOnItem",false)
-        val position = intent.getIntExtra("position",0)
+        val isClickedToView = intent.getBooleanExtra("clickedOnItem", false)
+        val position = intent.getIntExtra("position", 0)
 
-        val isOnLongButtonClicked = intent.getBooleanExtra("isOnLongClicked",false)
-        val positionLong = intent.getIntExtra("positionLong",0)
+        val isOnLongButtonClicked = intent.getBooleanExtra("isOnLongClicked", false)
+        val positionLong = intent.getIntExtra("positionLong", 0)
 
 
-        if (isOnLongButtonClicked){
-            val list:MutableList<DataModel> = note.getAllNotes()
+        if (isOnLongButtonClicked) {
+            val list: MutableList<DataModel> = note.getAllNotes()
 
             binding.title.setText(list[positionLong].title)
             binding.desc.setText(list[positionLong].description)
@@ -41,16 +41,11 @@ class AddNotesActivity : AppCompatActivity() {
             val selectedItem = note.selectById(id.toLong())
 
 
-            Log.d("checkList", "onCreate: "+list[position])
-            Log.d("checkList2", "onCreate: "+list[positionLong])
-            Log.d("selectedItem", "onCreate: $selectedItem")
             binding.btnSave.setOnLongClickListener {
                 val title = binding.title.text.toString()
                 val desc = binding.desc.text.toString()
-                selectedItem?.title =title
+                selectedItem?.title = title
                 selectedItem?.description = desc
-
-                Log.d("selectedItem2", "onCreate: $selectedItem")
 
                 if (selectedItem != null) {
                     note.updateTask(selectedItem)
@@ -63,33 +58,14 @@ class AddNotesActivity : AppCompatActivity() {
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
-        if (isClickedToView){
+        if (isClickedToView) {
             binding.title.isEnabled = false
             binding.desc.isEnabled = false
             binding.btnSave.visibility = View.GONE
             binding.textView2.text = getString(R.string.showNotes)
-            val list:MutableList<DataModel> = note.getAllNotes()
+            val list: MutableList<DataModel> = note.getAllNotes()
             binding.title.setText(list[position].title)
             binding.desc.setText(list[position].description)
 
@@ -99,12 +75,15 @@ class AddNotesActivity : AppCompatActivity() {
 
 
         binding.btnSave.setOnClickListener {
-            val data = DataModel(title = binding.title.text.toString(), description = binding.desc.text.toString())
+            val data = DataModel(
+                title = binding.title.text.toString(),
+                description = binding.desc.text.toString()
+            )
             note.addNote(data)
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
-        Log.d("porshode", ""+note.getAllNotes())
+        Log.d("porshode", "" + note.getAllNotes())
 
 
     }
